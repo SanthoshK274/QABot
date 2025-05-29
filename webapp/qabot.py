@@ -13,7 +13,7 @@ def loaddoc(file):
     return text
 
 def createvectorstore(doctext):
-    embeddings=GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key="AIzaSyB1U0HMZZ0aYFYXqrdtD9dkCOaK5c3P2ag")
+    embeddings=GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key="Your_API_Key")
     splitter=CharacterTextSplitter(chunk_size=1000,chunk_overlap=100)
     texts=splitter.split_text(doctext)
     vectorstore=FAISS.from_texts(texts,embeddings)
@@ -22,7 +22,7 @@ def createvectorstore(doctext):
 def response(query,doctext):
     vectorstore=createvectorstore(doctext)
     qabot=RetrievalQA.from_chain_type(
-        llm=ChatGoogleGenerativeAI(google_api_key="AIzaSyB1U0HMZZ0aYFYXqrdtD9dkCOaK5c3P2ag",
+        llm=ChatGoogleGenerativeAI(google_api_key="Your_API_Key",
                                    model="gemini-2.0-flash",
                                    temperature=0,
                                    max_tokens=None,
